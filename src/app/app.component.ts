@@ -19,6 +19,11 @@ export class AppComponent implements OnInit {
    gendersArray : Array<string> = ["Female", "male", "others"];
    countriesArray = countryList;
 
+    flag : boolean =false;
+
+    hide = true;
+    hide1 = true;
+
 
   ngOnInit(): void {
   
@@ -57,14 +62,14 @@ confirmPassword :  new FormControl({value : null , disabled: true}),
 
 currentAddress: new FormGroup(
   {
- address: new FormControl(null),
- country: new FormControl(null),
- state: new FormControl(null),
-  city: new FormControl(null),
-  zipcode: new FormControl(null),
+ address: new FormControl(null,[Validators.required]),
+ country: new FormControl(null,[Validators.required]),
+ state: new FormControl(null,[Validators.required]),
+  city: new FormControl(null,[Validators.required]),
+  zipcode: new FormControl(null,[Validators.required]),
 }),
 
-  permanantAddress: new FormGroup({
+permanantAddress: new FormGroup({
     address: new FormControl(null),
     country: new FormControl(null),
     state: new FormControl(null),
@@ -113,5 +118,20 @@ onSignUp(){
   this.skillsFormArray.removeAt(i)
  }
 
-}
 
+
+ onSameAddress(){
+  this.flag = !this.flag
+  console.log("click");
+    if (this.flag) {
+      this.f['permanantAddress'].patchValue(this.f['currentAddress'].value)
+      this.f['permanantAddress'].disable()
+    }else{
+      this.f['permanantAddress'].reset()
+      this.f['permanantAddress'].enable()
+    }
+
+ }
+
+
+}

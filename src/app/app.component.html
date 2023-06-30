@@ -87,7 +87,7 @@
       
 
        <div class="row">
-        <div class="col-sm-6" formGroupName="currentAddress">
+        <div class="col-sm-6 mt-4" formGroupName="currentAddress">
           <h5>Current Address</h5>
           <div class="form-group">
             <label for="address">Address</label>
@@ -118,8 +118,15 @@
         </div>
 
     
-          <div class="col-sm-6" formGroupName="currentAddress">
-            <h5>Permanant Address</h5>
+          <div class="col-sm-6" formGroupName="permanantAddress">
+            <!-- <ng-container *ngIf="f['currentAddress'].valid">
+              <input type="checkbox" name="" id="" (input)="onSameAddress()"> same as current Address
+            </ng-container> -->
+             
+              <input type="checkbox" name="" id="" (input)="onSameAddress()" [disabled]="f['currentAddress'].invalid"> same as current Address
+            
+
+            <h5>Permanant Address</h5> 
             <div class="form-group">
               <label for="address">Address</label>
               <input type="address" class="form-control" formControlName="address">
@@ -177,9 +184,10 @@
        </div>
          <hr>
 
-        <div class="form-group">
+        <div class="form-group ppass">
           <label class="Password">Password</label>
-          <input type="text" formControlName="Password" id="Password"  class="form-control">
+          <input [type]="hide1?'password': 'text'" formControlName="Password" id="Password"  class="form-control ">
+          <mat-icon class="mat-i" (click)="hide1=!hide1">{{hide1?"visibility_off":"visibility"}}</mat-icon>
           <ng-container *ngIf="f['Password'].invalid && f['Password'].touched">
             <p class="alert alert-danger" *ngIf="f['Password'].hasError('required')">
             Password is Mandatory.
@@ -190,9 +198,10 @@
             </p>
           </ng-container>
         </div>
-        <div class="form-group">
+        <div class="form-group ppass">
           <label class="confirmPassword">confirmPassword</label>
-          <input type="text" formControlName="confirmPassword" id="confirmPassword"  class="form-control">
+          <input [type]="hide?'password': 'text'" formControlName="confirmPassword" id="confirmPassword"  class="form-control cpass">
+          <mat-icon class="mat-i" (click)="hide=!hide">{{hide?"visibility_off":"visibility"}}</mat-icon>
          <ng-container *ngIf="f['confirmPassword'].dirty">
           <p class="alert alert-danger" *ngIf="f['confirmPassword'].value != f['Password'].value">
             Password & confirmPassword should be same
