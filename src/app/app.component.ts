@@ -41,7 +41,9 @@ export class AppComponent implements OnInit {
   
 
   createSignUpForm(){
+    
     this.signupForm = new FormGroup({
+
 userName : new FormControl(null,
   [Validators.required, Validators.maxLength(12), Validators.minLength(4), noSpaceBarValidator.noSpace]),
   empId: new FormControl(null, [Validators.required,EmpIdValidator.isEmpIdValid]),
@@ -105,6 +107,10 @@ onSignUp(){
    let skillsControl = new FormControl(null);
    this.skillsFormArray.push(skillsControl)
   }
+ }
+
+ OnDeleteControl(i: number) {
+  this.skillsFormArray.removeAt(i)
  }
 
 }
